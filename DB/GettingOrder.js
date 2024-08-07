@@ -2,7 +2,7 @@ import express from 'express'
 import { supabase } from '../Supabase.js'
 export const OrderRouter = express.Router()
 
-OrderRouter.get('/', async (res) => {
+OrderRouter.get('/', async (_, res) => {
   try {
     const { data, error } = await supabase
       .from('orders')
