@@ -2,17 +2,17 @@ import express from 'express'
 import { supabase } from '../Supabase.js'
 export const OrderRouter = express.Router()
 
-OrderRouter.get('/', async () => {
+OrderRouter.get('/', async (res) => {
   try {
     const { data, error } = await supabase
       .from('orders')
       .select('*')
       .order('created_at', { ascending: false })
     if (data) {
-      return NextResponse.json(data, { status: 201 })
+      return res.status(201).json(data)
     }
-    return NextResponse.json({ error }, { status: 400 })
+    return res.status(400).json({ error })
   } catch (error) {
-    return NextResponse.json({ message: error.message }, { status: 500 })
+    return res.status(500).json({ message: error.message })
   }
 })
