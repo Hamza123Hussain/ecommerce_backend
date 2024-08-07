@@ -3,6 +3,7 @@ import cors from 'cors' // Import the cors package
 import { Port } from './Config.js'
 import Router from './DB/ProductCrud.js'
 import { OrderRouter } from './DB/GettingOrder.js'
+import { RevenueRouter } from './DB/TotalRevenue.js'
 
 const app = express()
 
@@ -13,6 +14,7 @@ app.use(express.json())
 
 app.use('/api/Products', Router)
 app.use('/api/Orders', OrderRouter)
+app.use('/api/Revenue', RevenueRouter)
 
 app.listen(Port, () => {
   console.log(`Running on port ${Port}`)
