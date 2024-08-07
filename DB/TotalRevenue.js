@@ -1,4 +1,5 @@
 import express from 'express'
+import { supabase } from '../Supabase.js'
 export const RevenueRouter = express.Router()
 
 RevenueRouter.get('/', async (_, res) => {
@@ -8,10 +9,10 @@ RevenueRouter.get('/', async (_, res) => {
       .select('totalprice,tax,shipping,total')
 
     if (data) {
-      return res.json(data, { status: 201 })
+      return res.status(201).json(data)
     }
-    return res.json({ error }, { status: 400 })
+    return res.status(401).json({ error })
   } catch (error) {
-    return res.json({ message: error.message }, { status: 500 })
+    return res.status(500).json({ message: error.message })
   }
 })
