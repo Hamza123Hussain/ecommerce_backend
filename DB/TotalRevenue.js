@@ -7,11 +7,10 @@ RevenueRouter.get('/', async (_, res) => {
     const { data, error } = await supabase
       .from('orders')
       .select('totalprice,tax,shipping,total')
-
     if (data) {
       return res.status(201).json(data)
     }
-    return res.status(401).json({ error })
+    return res.status(400).json({ error })
   } catch (error) {
     return res.status(500).json({ message: error.message })
   }
